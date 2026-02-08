@@ -1,0 +1,87 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" fill="none">
+  <defs>
+    <linearGradient id="fluidMetal" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#FFD700;stop-opacity:0.9">
+        <animate attributeName="stop-color" values="#FFD700;#FFA500;#FFD700" dur="4s" repeatCount="indefinite" />
+      </stop>
+      <stop offset="50%" style="stop-color:#FFA500;stop-opacity:0.8">
+        <animate attributeName="stop-color" values="#FFA500;#FFD700;#FFA500" dur="4s" repeatCount="indefinite" begin="0.5s" />
+      </stop>
+      <stop offset="100%" style="stop-color:#D4AF37;stop-opacity:0.9">
+        <animate attributeName="stop-color" values="#D4AF37;#FFD700;#D4AF37" dur="4s" repeatCount="indefinite" begin="1s" />
+      </stop>
+    </linearGradient>
+
+    <linearGradient id="goldShine" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#FFD700;stop-opacity:0" />
+      <stop offset="50%" style="stop-color:#FFFFFF;stop-opacity:0.4">
+        <animate attributeName="offset" values="0%;100%;0%" dur="3s" repeatCount="indefinite" />
+      </stop>
+      <stop offset="100%" style="stop-color:#FFD700;stop-opacity:0" />
+    </linearGradient>
+
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="3" result="coloredBlur" />
+      <feMerge>
+        <feMergeNode in="coloredBlur" />
+        <feMergeNode in="SourceGraphic" />
+      </feMerge>
+    </filter>
+  </defs>
+
+  {/* 抽象马轮廓 - 流体线条风格 */}
+  <g filter="url(#glow)">
+    {/* 马头 */}
+    <path d="M120,280 Q100,260 110,230 Q115,210 130,200 Q145,190 160,200 Q175,195 185,180" stroke="url(#fluidMetal)" stroke-width="4" fill="none" strokeLinecap="round">
+      <animate attributeName="d" values="M120,280 Q100,260 110,230 Q115,210 130,200 Q145,190 160,200 Q175,195 185,180;M120,285 Q105,265 115,235 Q120,215 135,205 Q150,195 165,205 Q180,190 190,175;M120,280 Q100,260 110,230 Q115,210 130,200 Q145,190 160,200 Q175,195 185,180" dur="2s" repeatCount="indefinite" />
+    </path>
+
+    {/* 马耳 */}
+    <path d="M130,195 Q120,170 125,150" stroke="url(#fluidMetal)" stroke-width="3" fill="none" strokeLinecap="round" />
+    <path d="M155,190 Q150,165 155,145" stroke="url(#fluidMetal)" stroke-width="3" fill="none" strokeLinecap="round" />
+
+    {/* 马颈 */}
+    <path d="M185,180 Q200,190 210,220 Q220,250 230,280 Q235,300 240,320" stroke="url(#fluidMetal)" stroke-width="5" fill="none" strokeLinecap="round" />
+
+    {/* 马背 */}
+    <path d="M240,320 Q280,310 320,280 Q350,255 370,200 Q380,170 385,140" stroke="url(#fluidMetal)" stroke-width="5" fill="none" strokeLinecap="round">
+      <animate attributeName="d" values="M240,320 Q280,310 320,280 Q350,255 370,200 Q380,170 385,140;M245,315 Q285,305 325,275 Q355,250 375,195 Q385,165 390,135;M240,320 Q280,310 320,280 Q350,255 370,200 Q380,170 385,140" dur="2.5s" repeatCount="indefinite" />
+    </path>
+
+    {/* 马身 */}
+    <path d="M230,280 Q250,310 280,330 Q310,340 340,320" stroke="url(#fluidMetal)" stroke-width="4" fill="none" strokeLinecap="round" />
+
+    {/* 前腿 */}
+    <path d="M320,280 Q310,310 305,350 Q300,380 295,400" stroke="url(#fluidMetal)" stroke-width="3.5" fill="none" strokeLinecap="round">
+      <animate attributeName="d" values="M320,280 Q310,310 305,350 Q300,380 295,400;M320,285 Q310,315 305,355 Q300,385 290,405;M320,280 Q310,310 305,350 Q300,380 295,400" dur="0.8s" repeatCount="indefinite" />
+    </path>
+    <path d="M340,275 Q335,305 330,345 Q325,375 320,395" stroke="url(#fluidMetal)" stroke-width="3.5" fill="none" strokeLinecap="round">
+      <animate attributeName="d" values="M340,275 Q335,305 330,345 Q325,375 320,395;M340,280 Q335,310 330,350 Q325,380 315,400;M340,275 Q335,305 330,345 Q325,375 320,395" dur="0.8s" repeatCount="indefinite" begin="0.4s" />
+    </path>
+
+    {/* 后腿 */}
+    <path d="M280,330 Q260,360 250,390 Q245,410 240,425" stroke="url(#fluidMetal)" stroke-width="3.5" fill="none" strokeLinecap="round">
+      <animate attributeName="d" values="M280,330 Q260,360 250,390 Q245,410 240,425;M280,335 Q260,365 250,395 Q245,415 230,430;M280,330 Q260,360 250,390 Q245,410 240,425" dur="0.8s" repeatCount="indefinite" begin="0.6s" />
+    </path>
+    <path d="M300,325 Q275,355 265,385 Q260,405 255,420" stroke="url(#fluidMetal)" stroke-width="3.5" fill="none" strokeLinecap="round">
+      <animate attributeName="d" values="M300,325 Q275,355 265,385 Q260,405 255,420;M300,330 Q275,360 265,390 Q260,410 245,425;M300,325 Q275,355 265,385 Q260,405 255,420" dur="0.8s" repeatCount="indefinite" begin="0.2s" />
+    </path>
+
+    {/* 马尾 */}
+    <path d="M120,280 Q100,300 85,330 Q70,360 60,390" stroke="url(#fluidMetal)" stroke-width="4" fill="none" strokeLinecap="round">
+      <animate attributeName="d" values="M120,280 Q100,300 85,330 Q70,360 60,390;M115,285 Q95,305 80,335 Q65,365 55,395;M120,280 Q100,300 85,330 Q70,360 60,390" dur="1.5s" repeatCount="indefinite" />
+    </path>
+    <path d="M120,280 Q105,295 90,320" stroke="url(#fluidMetal)" stroke-width="3" fill="none" strokeLinecap="round" opacity="0.7" />
+    <path d="M115,285 Q100,300 85,325" stroke="url(#fluidMetal)" stroke-width="3" fill="none" strokeLinecap="round" opacity="0.7">
+      <animate attributeName="d" values="M115,285 Q100,300 85,325;M110,290 Q95,305 80,330;M115,285 Q100,300 85,325" dur="1s" repeatCount="indefinite" />
+    </path>
+  </g>
+
+  {/* 流体线条装饰 */}
+  <path d="M50,200 Q100,180 150,200 Q200,220 250,200" stroke="url(#goldShine)" stroke-width="1" fill="none" opacity="0.6">
+    <animate attributeName="d" values="M50,200 Q100,180 150,200 Q200,220 250,200;M50,210 Q100,190 150,210 Q200,230 250,210;M50,200 Q100,180 150,200 Q200,220 250,200" dur="3s" repeatCount="indefinite" />
+  </path>
+  <path d="M250,250 Q300,230 350,250" stroke="url(#goldShine)" stroke-width="1" fill="none" opacity="0.6">
+    <animate attributeName="d" values="M250,250 Q300,230 350,250;M250,260 Q300,240 350,260;M250,250 Q300,230 350,250" dur="2.5s" repeatCount="indefinite" />
+  </path>
+</svg>

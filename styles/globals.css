@@ -1,0 +1,269 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* 全局基础样式 */
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+html {
+  font-size: 18px; /* 适老化：基础字号加大 */
+}
+
+body {
+  font-family: 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background: linear-gradient(135deg, #FFFBF2 0%, #FFF8E7 50%, #FFFBF2 100%);
+  background-attachment: fixed;
+}
+
+/* 主按钮样式 - 策马新春主题 */
+.btn-primary {
+  min-height: 56px;
+  padding: 0 32px;
+  font-size: 20px;
+  font-weight: 600;
+  background: linear-gradient(135deg, #D32F2F 0%, #FFD700 100%);
+  color: white;
+  border: none;
+  border-radius: 16px;
+  box-shadow: 0 4px 12px rgba(211, 47, 47, 0.3);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+}
+
+/* 按钮流光效果 */
+.btn-primary::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.3),
+    transparent
+  );
+  transition: left 0.5s ease;
+}
+
+.btn-primary:hover::before {
+  left: 100%;
+}
+
+.btn-primary:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(211, 47, 47, 0.4);
+}
+
+.btn-primary:active:not(:disabled) {
+  transform: translateY(0);
+}
+
+.btn-primary:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* 次要按钮样式 */
+.btn-secondary {
+  min-height: 48px;
+  padding: 0 24px;
+  font-size: 18px;
+  font-weight: 500;
+  background: white;
+  color: #D32F2F;
+  border: 2px solid #D32F2F;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.btn-secondary:hover {
+  background: #FFF5F2;
+  border-color: #FFD700;
+  box-shadow: 0 2px 8px rgba(255, 215, 0, 0.2);
+}
+
+.btn-secondary:active {
+  transform: scale(0.98);
+}
+
+/* 贺词卡片样式 - 新中式风格 */
+.greeting-card {
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 20px;
+  padding: 32px;
+  margin: 0 auto;
+  box-shadow: 0 8px 24px rgba(26, 26, 26, 0.08);
+  line-height: 1.8;
+  font-size: 20px;
+  color: #1A1A1A;
+  border: 1px solid rgba(255, 215, 0, 0.2);
+  backdrop-filter: blur(10px);
+}
+
+/* 微动效：淡入 */
+@keyframes fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-in {
+  animation: fade-in 0.5s ease-out;
+}
+
+/* 微动效：云纹漂浮 */
+@keyframes cloud-float {
+  0%, 100% {
+    transform: translateY(0) translateX(0);
+    opacity: 0.15;
+  }
+  50% {
+    transform: translateY(-10px) translateX(5px);
+    opacity: 0.25;
+  }
+}
+
+.animate-cloud {
+  animation: cloud-float 8s ease-in-out infinite;
+}
+
+/* 微动效：鎏金闪光 */
+@keyframes gold-shimmer {
+  0%, 100% {
+    opacity: 0.6;
+    filter: hue-rotate(0deg);
+  }
+  50% {
+    opacity: 1;
+    filter: hue-rotate(15deg);
+  }
+}
+
+.animate-gold {
+  animation: gold-shimmer 3s ease-in-out infinite;
+}
+
+/* 微动效：印章脉动 */
+@keyframes seal-pulse {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 0.25;
+  }
+  50% {
+    transform: scale(1.02);
+    opacity: 0.35;
+  }
+}
+
+.animate-seal {
+  animation: seal-pulse 4s ease-in-out infinite;
+}
+
+/* 微动效：圆环旋转 */
+@keyframes ring-rotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.animate-ring {
+  animation: ring-rotate 20s linear infinite;
+}
+
+/* 背景纹理层 */
+.bg-texture-layer {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 0;
+  overflow: hidden;
+}
+
+.bg-texture-layer > * {
+  position: absolute;
+  opacity: 0.15;
+}
+
+/* 滚动条样式（美化） */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #FFFAF0;
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(135deg, #D32F2F, #FFD700);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(135deg, #B71C1C, #FFA500);
+}
+
+/* 移动端优化：点击区域扩大 */
+@media (max-width: 768px) {
+  .btn-primary,
+  .btn-secondary {
+    min-height: 56px;
+    font-size: 18px;
+  }
+
+  .greeting-card {
+    font-size: 19px;
+    padding: 24px;
+  }
+}
+
+/* 适老化：高对比度支持 */
+@media (prefers-contrast: high) {
+  .btn-primary {
+    background: #b8323a;
+  }
+
+  .greeting-card {
+    border: 2px solid #e0e0e0;
+  }
+}
+
+/* 打印样式（如果用户要打印贺卡） */
+@media print {
+  body {
+    background: white;
+  }
+
+  .btn-primary,
+  .btn-secondary {
+    display: none;
+  }
+}

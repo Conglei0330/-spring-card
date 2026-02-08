@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" fill="none" opacity="0.25">
+  <defs>
+    <linearGradient id="sealGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#D32F2F;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#B71C1C;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+
+  {/* 印章外框 */}
+  <rect x="10" y="10" width="100" height="100" rx="4"
+        fill="none" stroke="url(#sealGradient)" stroke-width="3" />
+
+  {/* 印章内框 */}
+  <rect x="15" y="15" width="90" height="90" rx="2"
+        fill="none" stroke="url(#sealGradient)" stroke-width="1.5" opacity="0.8" />
+
+  {/* 四角装饰云纹 */}
+  <path d="M10,20 Q15,15 20,20 Q25,15 30,20 Q35,15 40,20"
+        stroke="url(#sealGradient)" stroke-width="2" fill="none" />
+  <path d="M10,100 Q15,105 20,100 Q25,105 30,100 Q35,105 40,100"
+        stroke="url(#sealGradient)" stroke-width="2" fill="none" />
+  <path d="M20,10 Q15,15 20,20 Q15,25 20,30 Q15,35 20,40"
+        stroke="url(#sealGradient)" stroke-width="2" fill="none" />
+  <path d="M100,10 Q105,15 100,20 Q105,25 100,30 Q105,35 100,40"
+        stroke="url(#sealGradient)" stroke-width="2" fill="none" />
+
+  {/* 中间文字区域示意 */}
+  <rect x="25" y="30" width="70" height="60"
+        stroke="url(#sealGradient)" stroke-width="1" fill="none" opacity="0.5" />
+
+  {/* 中心点 */}
+  <circle cx="60" cy="60" r="3" fill="url(#sealGradient)" />
+</svg>
