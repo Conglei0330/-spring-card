@@ -33,16 +33,34 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   const checkLogin = async (): Promise<boolean> => {
     try {
       const response = await fetch('/api/auth/me');
-      const result = await response.json();
 
-      if (result.success && result.data) {
-        setUser(result.data);
-        return true;
+      if (!response.ok) {
+        setUser(null);
+        return false;
+      }
+
+      // 检查响应是否有内容
+      const text = await response.text();
+      if (!text.trim()) {
+        setUser(null);
+        return false;
+      }
+
+      try {
+        const result = JSON.parse(text);
+        if (result.success && result.data) {
+          setUser(result.data);
+          return true;
+        }
+      } catch {
+        // JSON 解析失败
+        console.warn('checkLogin: 响应不是有效的JSON');
       }
 
       setUser(null);
       return false;
-    } catch {
+    } catch (error) {
+      console.error('checkLogin 错误:', error);
       setUser(null);
       return false;
     }
@@ -50,19 +68,29 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
   // 登录（手机号直接登录，用户不存在则自动注册）
   const login = async (phone: string) => {
-    const response = await fetch('/api/auth/login', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ phone }),
-    });
+    try {
+      const response = await fetch('/api/auth/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ phone }),
+      });
 
-    const result = await response.json();
+      const contentType = response.headers.get('content-type');
+      if (!contentType || !contentType.includes('application/json')) {
+        throw new Error(`服务器错误: ${response.status} ${response.statusText} - 返回的不是JSON格式`);
+      }
 
-    if (!response.ok) {
-      throw new Error(result.error || '登录失败');
+      const result = await response.json();
+
+      if (!response.ok) {
+        throw new Error(result.error || '登录失败');
+      }
+
+      setUser(result.data);
+    } catch (error: any) {
+      console.error('登录错误:', error);
+      throw error;
     }
-
-    setUser(result.data);
   };
 
   // 登出

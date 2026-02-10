@@ -4,8 +4,9 @@
   "description": "马年新春贺卡生成器 - 使用阿里云百炼",
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
+    "build": "prisma generate && next build",
     "start": "next start",
+    "postinstall": "prisma generate",
     "lint": "next lint"
   },
   "dependencies": {
