@@ -1,7 +1,6 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
-import { prisma } from '@/lib/prisma';
-import bcrypt from 'bcryptjs';
-import { validatePhone, validatePassword, generateToken, setAuthCookie, DEFAULT_AVATAR } from '@/lib/auth';
+import { findOrCreateUser, findUser } from '@/lib/user-store';
+import { validatePhone, validatePassword, generateToken, setAuthCookie } from '@/lib/auth';
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   if (req.method !== 'POST') {
@@ -25,26 +24,14 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     }
 
     // 检查用户是否已存在
-    const existingUser = await prisma.user.findUnique({
-      where: { phone },
-    });
+    const existingUser = findUser(phone);
 
     if (existingUser) {
       return res.status(400).json({ error: '该手机号已注册' });
     }
 
-    // 密码加密（加盐哈希）
-    const hashedPassword = await bcrypt.hash(password, 10);
-
-    // 创建用户
-    const user = await prisma.user.create({
-      data: {
-        phone,
-        password: hashedPassword,
-        nickname: `用户${phone.slice(-4)}`,
-        avatar: DEFAULT_AVATAR,
-      },
-    });
+    // 创建用户（简化版，不存储密码）
+    const user = findOrCreateUser(phone);
 
     // 生成 JWT Token
     const token = generateToken({
@@ -55,7 +42,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     // 设置 Cookie
     setAuthCookie(res, token);
 
-    // 返回用户信息（不带密码）
+    // 返回用户信息
     return res.status(200).json({
       success: true,
       data: {

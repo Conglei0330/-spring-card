@@ -1,6 +1,6 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
 import { getCurrentUserFromRequest } from '@/lib/auth';
-import { prisma } from '@/lib/prisma';
+import { findUser } from '@/lib/user-store';
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   if (req.method !== 'GET') {
@@ -14,15 +14,11 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       return res.status(200).json({ success: false, data: null });
     }
 
-    const user = await prisma.user.findUnique({
-      where: { id: payload.userId },
-      select: {
-        id: true,
-        phone: true,
-        nickname: true,
-        avatar: true,
-      },
-    });
+    const user = findUser(payload.phone);
+
+    if (!user) {
+      return res.status(200).json({ success: false, data: null });
+    }
 
     return res.status(200).json({ success: true, data: user });
   } catch (error: any) {
